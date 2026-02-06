@@ -1,13 +1,17 @@
+// Package main
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"log"
+
+	"github.com/warmdev17/innogenlab.com/internal/database"
+	"github.com/warmdev17/innogenlab.com/internal/routes"
+)
 
 func main() {
-	r := gin.Default()
-
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(200, gin.H{"msg": "Backend running"})
-	})
-
-	r.Run(":8080")
+	database.Connect()
+	r := routes.SetupRouter()
+	if err := r.Run(":8080"); err != nil {
+		log.Fatal("Server start failed:", err)
+	}
 }
