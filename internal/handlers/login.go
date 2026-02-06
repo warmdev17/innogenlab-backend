@@ -46,6 +46,6 @@ func Login(c *gin.Context) {
 	tokenString, _ := token.SignedString(jwtKey)
 
 	c.JSON(200, gin.H{
-		"tolen": tokenString,
+		"token": tokenString,
 	})
 }
